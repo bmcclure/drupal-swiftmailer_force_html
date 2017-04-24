@@ -1,0 +1,7 @@
+Swift Mailer Force HTML 8.x-1.0-beta1, 2017-04-24
+-------------------------------------------------
+No changes since initial release
+
+Swift Mailer Force HTML 8.x-1.x-dev, 2017-04-24
+-----------------------------------------------
+Initial dev release by bmcclure
