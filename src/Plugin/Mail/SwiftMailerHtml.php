@@ -15,7 +15,6 @@ use Drupal\swiftmailer\Plugin\Mail\SwiftMailer;
  *   description = @Translation("Forces the given body text to be interpreted as HTML.")
  * )
  */
-
 class SwiftMailerHtml extends SwiftMailer {
 
   /**
@@ -25,16 +24,17 @@ class SwiftMailerHtml extends SwiftMailer {
    *   The message.
    *
    * @return array
+   *   The massaged message.
    */
   public function massageMessageBody(array $message) {
     // @see: SwiftMailer::massageMessageBody()
     $line_endings = Settings::get('mail_line_endings', PHP_EOL);
 
     $message['body'] = Markup::create(implode($line_endings, array_map(function ($body) {
-      // If the field contains no html tags we can assume newlines will need be converted to <br>
+      // If the field contains no html tags,
+      // we can assume newlines will need be converted to <br>.
       if (strlen(strip_tags($body)) === strlen($body)) {
-        $body = str_replace("\r", '', $body);
-        $body = str_replace("\n", '<br>', $body);
+        $body = nl2br($body);
       }
 
       return check_markup($body, 'full_html');
@@ -42,4 +42,5 @@ class SwiftMailerHtml extends SwiftMailer {
 
     return $message;
   }
+
 }
